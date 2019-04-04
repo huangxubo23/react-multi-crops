@@ -71,8 +71,8 @@ ReactDOM.render(
 | width       | Width of background image.                                   | number(in pixel)                         | -       |
 | minWidth      | Min width of crop.                                  | number(in pixel)                         | -       |
 | height      | Height of background image.                                  | number(in pixel)                         | -       |
-| minHeight      | Min feight of crop.                                  | number(in pixel)                         | -       |
-| maxLimit      | Max limit of crops.                                  | number(in pixel)                         | -       |
+| minHeight      | Min height of crop.                                  | number(in pixel)                         | -       |
+| maxLimit      | Max limit of crops.                                  | number                        | -       |
 | onDraw      | A callback which hanppends when a user starts drawing a new rectangle. | funtion(coordinate , index, coordinates) | -       |
 | onDrag      | A callback which hanppends when  a user stars draging a exited rectangle. | funtion(coordinate , index, coordinates) | -       |
 | onResize    | A callback which hanppends when a user starts resizing a exited rectangle. | funtion(coordinate , index, coordinates) | -       |
