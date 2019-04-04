@@ -28,6 +28,9 @@ export declare type CropsProps = {
     src: string
     width?: number
     height?: number
+    minWidth?: number
+    minHeight?: number
+    maxLimit?: number
     coordinates: coordinateType[]
     onChange?: any,
     onDelete?: any,
@@ -43,6 +46,9 @@ export default class MultiCrops extends React.Component<CropsProps> {
         src: string,
         width?: number,
         height?: number,
+        minWidth?: number
+        minHeight?: number
+        maxLimit?: number
         coordinates: any,
         onChange?: any,
         onDelete?: any,
