@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import MultiCrops from '../src/components/MultiCrops'
-import img from './imgs/kumamon.jpg'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MultiCrops from '../src/components/MultiCrops';
+import img from './imgs/kumamon.jpg';
 
 
 class App extends React.Component {
@@ -19,12 +19,12 @@ class App extends React.Component {
   changeCoordinate = (coordinate, index, coordinates) => {
     this.setState({
       coordinates,
-    })
+    });
   }
   deleteCoordinate = (coordinate, index, coordinates) => {
     this.setState({
       coordinates,
-    })
+    });
   }
   render() {
     return (
@@ -33,6 +33,9 @@ class App extends React.Component {
         <MultiCrops
           src={img}
           width={1000}
+          minWidth={50}
+          minHeight={50}
+          maxLimit={12}
           coordinates={this.state.coordinates}
           // onDrag={this.changeCoordinate}
           // onResize={this.changeCoordinate}
@@ -42,7 +45,7 @@ class App extends React.Component {
           // onLoad={e => console.log(e.target.height, e.target.width)}
         />
       </div>
-    )
+    );
   }
 }
 
@@ -52,4 +55,4 @@ ReactDOM.render(
     <App />
   </div>,
   document.getElementById('root'),
-)
+);

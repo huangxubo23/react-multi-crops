@@ -1,5 +1,5 @@
-import React from 'react'
-import Protypes from 'prop-types'
+import React from 'react';
+import Protypes from 'prop-types';
 
 
 export const DeleteIcon = props => (
@@ -50,7 +50,7 @@ export const DeleteIcon = props => (
     </style>
   </div>
 
-)
+);
 
 export const NumberIcon = ({ number }) => (
   <div className="rmc-number">
@@ -70,15 +70,15 @@ export const NumberIcon = ({ number }) => (
     `}
     </style>
   </div>
-)
+);
 
-const { number } = Protypes
+const { number } = Protypes;
 
 NumberIcon.propTypes = {
   number,
-}
+};
 
 NumberIcon.defaultProps = {
   number: '',
-}
+};
 

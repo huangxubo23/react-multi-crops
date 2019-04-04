@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { equals, is, update, remove } from 'ramda'
-import interact from 'interactjs'
-import { DeleteIcon, NumberIcon } from './Icons'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { equals, is, update, remove } from 'ramda';
+import interact from 'interactjs';
+import { DeleteIcon, NumberIcon } from './Icons';
 
 class Crop extends Component {
   static cropStyle = (coordinate) => {
     const {
       x, y, width, height,
-    } = coordinate
+    } = coordinate;
 
     return {
       // border: '1px dotted rgba(153,153,153,1)',
@@ -24,7 +24,7 @@ class Crop extends Component {
       boxShadow: '0 0 6px #000',
       background: '#8c8c8c',
       opacity: 0.6,
-    }
+    };
   }
 
   componentDidMount() {
@@ -36,12 +36,12 @@ class Crop extends Component {
         },
       })
       .on('dragmove', this.handleDragMove)
-      .on('resizemove', this.handleResizeMove)
+      .on('resizemove', this.handleResizeMove);
   }
   shouldComponentUpdate(nextProps) {
     // reduce uncessary update
     return !equals(nextProps.coordinate, this.props.coordinate)
-      || (nextProps.index !== this.props.index)
+      || (nextProps.index !== this.props.index);
   }
 
   handleResizeMove = (e) => {
@@ -52,19 +52,29 @@ class Crop extends Component {
       coordinates,
       onResize,
       onChange,
-    } = this.props
-    const { width, height } = e.rect
-    const { left, top } = e.deltaRect
+      minWidth,
+      minHeight,
+    } = this.props;
+    let { width, height } = e.rect;
+    if (minWidth && minWidth > width) {
+      if (minWidth === width) return;
+      width = minWidth;
+    }
+    if (minHeight && minHeight > height) {
+      if (minHeight === height) return;
+      height = minHeight;
+    }
+    const { left, top } = e.deltaRect;
 
     const nextCoordinate = {
       ...coordinate, x: x + left, y: y + top, width, height,
-    }
-    const nextCoordinates = update(index, nextCoordinate)(coordinates)
+    };
+    const nextCoordinates = update(index, nextCoordinate)(coordinates);
     if (is(Function, onResize)) {
-      onResize(nextCoordinate, index, nextCoordinates)
+      onResize(nextCoordinate, index, nextCoordinates);
     }
     if (is(Function, onChange)) {
-      onChange(nextCoordinate, index, nextCoordinates)
+      onChange(nextCoordinate, index, nextCoordinates);
     }
   }
   handleDragMove = (e) => {
@@ -75,16 +85,16 @@ class Crop extends Component {
       coordinates,
       onDrag,
       onChange,
-    } = this.props
-    const { dx, dy } = e
-    const nextCoordinate = { ...coordinate, x: x + dx, y: y + dy }
-    const nextCoordinates = update(index, nextCoordinate)(coordinates)
+    } = this.props;
+    const { dx, dy } = e;
+    const nextCoordinate = { ...coordinate, x: x + dx, y: y + dy };
+    const nextCoordinates = update(index, nextCoordinate)(coordinates);
     if (is(Function, onDrag)) {
-      onDrag(nextCoordinate, index, nextCoordinates)
+      onDrag(nextCoordinate, index, nextCoordinates);
     }
 
     if (is(Function, onChange)) {
-      onChange(nextCoordinate, index, nextCoordinates)
+      onChange(nextCoordinate, index, nextCoordinates);
     }
   }
 
@@ -94,21 +104,21 @@ class Crop extends Component {
       coordinate,
       onDelete,
       coordinates,
-    } = this.props
-    const nextCoordinates = remove(index, 1)(coordinates)
+    } = this.props;
+    const nextCoordinates = remove(index, 1)(coordinates);
     if (is(Function, onDelete)) {
-      onDelete(coordinate, index, nextCoordinates)
+      onDelete(coordinate, index, nextCoordinates);
     }
   }
 
   componentWillUnmount() {
     interact(this.crop)
-      .unset()
+      .unset();
   }
 
 
   render() {
-    const { coordinate, index } = this.props
+    const { coordinate, index } = this.props;
     return (
       <div
         style={Crop.cropStyle(coordinate)}
@@ -119,7 +129,7 @@ class Crop extends Component {
           onClick={this.handleDelete}
         />
       </div>
-    )
+    );
   }
 }
 
@@ -129,7 +139,7 @@ export const coordinateType = PropTypes.shape({
   y: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-})
+});
 
 Crop.propTypes = {
   coordinate: coordinateType.isRequired,
@@ -138,7 +148,9 @@ Crop.propTypes = {
   onDrag: PropTypes.func, // eslint-disable-line
   onDelete: PropTypes.func, // eslint-disable-line
   onChange: PropTypes.func, // eslint-disable-line
-  coordinates: PropTypes.array // eslint-disable-line
-}
+  coordinates: PropTypes.array, // eslint-disable-line
+  minWidth: PropTypes.number, // eslint-disable-line
+  minHeight: PropTypes.number, // eslint-disable-line
+};
 
-export default Crop
+export default Crop;

@@ -41,6 +41,9 @@ class App extends React.Component {
         <MultiCrops
           src={img}
           width={1000}
+          minWidth={50}
+          minHeight={50}
+          maxLimit={12}
           coordinates={this.state.coordinates}
           onChange={this.changeCoordinate}
           onDelete={this.deleteCoordinate}
@@ -66,7 +69,10 @@ ReactDOM.render(
 | src         | Src of background image.                                     | string                                   | -       |
 | coordinates | An array of coordinate( see the table blew), {id, x, y, width, height}. | array                                    | []      |
 | width       | Width of background image.                                   | number(in pixel)                         | -       |
+| minWidth      | Min width of crop.                                  | number(in pixel)                         | -       |
 | height      | Height of background image.                                  | number(in pixel)                         | -       |
+| minHeight      | Min feight of crop.                                  | number(in pixel)                         | -       |
+| maxLimit      | Max limit of crops.                                  | number(in pixel)                         | -       |
 | onDraw      | A callback which hanppends when a user starts drawing a new rectangle. | funtion(coordinate , index, coordinates) | -       |
 | onDrag      | A callback which hanppends when  a user stars draging a exited rectangle. | funtion(coordinate , index, coordinates) | -       |
 | onResize    | A callback which hanppends when a user starts resizing a exited rectangle. | funtion(coordinate , index, coordinates) | -       |
